@@ -1,0 +1,32 @@
+consul:
+  image: progrium/consul
+  ports:
+    - "8500:8500"
+  command: "-server -bootstrap -ui-dir /ui"
+
+server:
+  image: spring-cloud-docker-demo/server
+  links:
+    - consul
+  ports:
+    - "8080"
+  environment:
+    - SPRING_CLOUD_CONSUL_HOST=consul
+
+simple-client:
+  image: spring-cloud-docker-demo/simple-client
+  links:
+    - consul
+  ports:
+    - "8081:8081"
+  environment:
+      - SPRING_CLOUD_CONSUL_HOST=consul
+
+advanced-client:
+  image: spring-cloud-docker-demo/advanced-client
+  links:
+    - consul
+  ports:
+    - "8082:8082"
+  environment:
+      - SPRING_CLOUD_CONSUL_HOST=consul
