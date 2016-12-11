@@ -73,7 +73,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>Brixton.SR4</version>
+				<version>Camden.SR3</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
