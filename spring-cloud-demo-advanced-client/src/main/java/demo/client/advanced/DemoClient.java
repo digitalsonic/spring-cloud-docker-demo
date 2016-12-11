@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @FeignClient("spring-cloud-demo-server")
 public interface DemoClient {
+    @RequestMapping("/hi/{name}")
+    @ResponseBody
+    String hi(@PathVariable("name") String name);
+
 
     @RequestMapping("/greeting/{name}")
     @ResponseBody

@@ -15,7 +15,12 @@ public class GreetingService {
     private DemoClient demoClient;
 
     @HystrixCommand(fallbackMethod = "getDefaultGreeting")
-    public String getGreeting() {
+    public String sayHi() {
+        return demoClient.hi("digitalsonic");
+    }
+
+    @HystrixCommand(fallbackMethod = "getDefaultGreeting")
+    public String greeting() {
         ServiceInstance instance = discoveryClient.getLocalServiceInstance();
         return demoClient.greeting(instance.getServiceId());
     }
