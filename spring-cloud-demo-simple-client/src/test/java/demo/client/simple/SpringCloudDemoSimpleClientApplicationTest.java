@@ -31,17 +31,17 @@ public class SpringCloudDemoSimpleClientApplicationTest {
     @Autowired
     private SpringCloudDemoSimpleClientApplication app;
 
-    private Runner runner;
+    private Runner runner; // Moco Runner
     private MockMvc mockMvc;
 
     @Before
     public void setUp() throws Exception {
-        mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
         HttpServer server = httpServer(12345);
         server.response("Hi digitalsonic");
         runner = runner(server);
         runner.start();
 
+        mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
         app.setRestTemplate(new RestTemplate()); // Bypass the @LoadBalanced one
     }
 
