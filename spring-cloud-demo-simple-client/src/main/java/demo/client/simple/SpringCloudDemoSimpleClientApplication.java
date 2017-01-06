@@ -1,5 +1,7 @@
 package demo.client.simple;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -20,6 +22,9 @@ import org.springframework.web.client.RestTemplate;
 @EnableOAuth2Client
 @RestController
 public class SpringCloudDemoSimpleClientApplication {
+	private static final Logger logger =
+			LoggerFactory.getLogger(SpringCloudDemoSimpleClientApplication.class);
+
 	@Autowired
 	private RestTemplate restTemplate;
 	@Value("${remote.server:spring-cloud-demo-server}")
@@ -31,12 +36,14 @@ public class SpringCloudDemoSimpleClientApplication {
 
 	@RequestMapping("/")
 	public String sayHi() {
+		logger.info("Going to call http://{}/hi/digitalsonic", remote);
 		return restTemplate.getForObject("http://" + remote + "/hi/{name}",
 				String.class, "digitalsonic");
 	}
 
 	@RequestMapping("/greeting")
 	public String greeting() {
+		logger.info("Going to call http://{}/greeting/digitalsonic", remote);
 		return restTemplate.getForObject("http://" + remote + "/greeting/{name}",
 				String.class, "digitalsonic");
 	}
